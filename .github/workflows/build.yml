@@ -51,4 +51,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: target/debug/save-id
+          path: target/debug/game-save-scanner
