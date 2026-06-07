@@ -37,8 +37,7 @@ impl App {
 }
 
 impl eframe::App for App {
-    fn ui(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        //egui::CentralPanel::default().show_inside(ctx, |ui| {
+    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {        //egui::CentralPanel::default().show_inside(ctx, |ui| {
             ui.heading("Game Save Scanner");
 
             if ui.button("Select Folder").clicked() {
