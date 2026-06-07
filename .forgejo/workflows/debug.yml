@@ -1,0 +1,12 @@
+name: Debug
+
+on:
+  push:
+
+jobs:
+  debug:
+    runs-on: codeberg-small
+
+    steps:
+      - name: Dump environment
+        run: env | sort
