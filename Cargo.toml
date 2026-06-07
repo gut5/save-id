@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-eframe = "0.29"
-egui = "0.29"
-rfd = "0.14"
-walkdir = "2"
-regex = "1"
-rusqlite = { version = "0.31", features = ["bundled"] }
+eframe = "0.34.3"
+egui = "0.34.3"
+rfd = "0.17.2"
+walkdir = "2.5.0"
+regex = "1.12.3"
+rusqlite = { version = "0.40.1", features = ["bundled"] }
