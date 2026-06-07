@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-linux:
-    runs-on: codeberg-small
+    runs-on: codeberg-medium
 
     container:
       image: rust:1.88-bookworm
