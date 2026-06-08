@@ -37,45 +37,42 @@ impl App {
 }
 
 impl eframe::App for App {
-    fn ui(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::CentralPanel::default().show_inside(ctx, |ui| {
-            ui.heading("Game Save Scanner");
+    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+        ui.heading("Game Save Scanner");
 
-            if ui.button("Select Folder").clicked() {
-                if let Some(path) = FileDialog::new().pick_folder() {
-                    self.folder = Some(path.display().to_string());
-                }
+        if ui.button("Select Folder").clicked() {
+            if let Some(path) = FileDialog::new().pick_folder() {
+                self.folder = Some(path.display().to_string());
             }
+        }
 
-            if let Some(folder) = &self.folder {
-                ui.label(format!("Folder: {}", folder));
+        if let Some(folder) = &self.folder {
+            ui.label(format!("Folder: {}", folder));
+        }
+
+        if ui.button("Scan").clicked() {
+            self.run_scan();
+        }
+
+        ui.separator();
+
+        ui.label(format!("Results: {}", self.results.len()));
+
+        egui::ScrollArea::vertical().show(ui, |ui| {
+            for r in &self.results {
+                ui.horizontal(|ui| {
+                    ui.label(r.path.clone());
+                    ui.separator();
+                    ui.label(r.code.clone().unwrap_or("-".to_string()));
+                    ui.separator();
+                    ui.label(r.game_name.clone().unwrap_or("Unknown".to_string()));
+                    ui.separator();
+                    ui.label(r.console.clone().unwrap_or("-".to_string()));
+                });
             }
-
-            if ui.button("Scan").clicked() {
-                self.run_scan();
-            }
-
-            ui.separator();
-
-            ui.label(format!("Results: {}", self.results.len()));
-
-            egui::ScrollArea::vertical().show(ui, |ui| {
-                for r in &self.results {
-                    ui.horizontal(|ui| {
-                        ui.label(r.path.clone());
-                        ui.separator();
-                        ui.label(r.code.clone().unwrap_or("-".to_string()));
-                        ui.separator();
-                        ui.label(r.game_name.clone().unwrap_or("Unknown".to_string()));
-                        ui.separator();
-                        ui.label(r.console.clone().unwrap_or("-".to_string()));
-                    });
-                }
-            });
         });
     }
 }
-
 
 fn main() -> eframe::Result<()> {
     let options = eframe::NativeOptions::default();
